@@ -37,7 +37,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
-        Optional<Usuario> usuario = usuarioService.buscarPorUsername(request.get("userneame"));
+        Optional<Usuario> usuario = usuarioService.buscarPorUsername(request.get("username"));
         if (usuario.isPresent() && usuario.get().getPassword().equals(request.get("password"))){
             String token = JwtUtil.generateToken(usuario.get().getUsername());
                 return ResponseEntity.ok(Map.of("token", token));
